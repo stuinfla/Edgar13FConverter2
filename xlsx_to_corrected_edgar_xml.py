@@ -9,39 +9,47 @@ def create_perfect_edgar_xml(input_xlsx, output_xml):
     # Read the Excel file
     df = pd.read_excel(input_xlsx)
     
-    # Create the root element with prefixed namespace
+    # Create the root element with proper namespace declaration and prefix
     root = Element("ns1:informationTable", attrib={
-        "xmlns:ns1": "http://www.sec.gov/edgar/document/thirteenf/informationtable"
+        "xmlns:ns1": "http://www.sec.gov/edgar/document/thirteenf/informationtable",
+        "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
     })
 
     # Iterate through each row in the dataframe
     for _, row in df.iterrows():
-        # Create an infoTable entry
+        # Create an infoTable entry with namespace prefix
         info_table = SubElement(root, "ns1:infoTable")
         
-        # Map the fields with the required namespace prefix
+        # Required fields with namespace prefix
         SubElement(info_table, "ns1:nameOfIssuer").text = str(row["Name of Issuer"]).strip()
         SubElement(info_table, "ns1:titleOfClass").text = str(row["Title of Class"]).strip()
         SubElement(info_table, "ns1:cusip").text = str(row["Cusip"]).strip()
-        # Round value to nearest dollar as per SEC requirements
+        
+        # Optional FIGI field with namespace prefix
+        if pd.notnull(row.get("FIGI", None)):
+            SubElement(info_table, "ns1:figi").text = str(row["FIGI"]).strip()
+        
+        # Value rounded to nearest dollar with namespace prefix
         value = round(float(row["Value (to the nearest dollar)"]))
         SubElement(info_table, "ns1:value").text = str(int(value)).strip()
         
-        # Nested element for shares or principal amount
+        # Shares or principal amount with namespace prefix
         shrs_or_prn_amt = SubElement(info_table, "ns1:shrsOrPrnAmt")
         SubElement(shrs_or_prn_amt, "ns1:sshPrnamt").text = str(int(row["Shares or Principal Amount"])).strip()
         SubElement(shrs_or_prn_amt, "ns1:sshPrnamtType").text = str(row["Shares/Principal"]).strip()
         
-        # Optional elements with conditional inclusion
+        # Optional put/call field with namespace prefix
         if pd.notnull(row.get("put/call", None)):
             SubElement(info_table, "ns1:putCall").text = str(row["put/call"]).strip()
         
+        # Required investment discretion with namespace prefix
         SubElement(info_table, "ns1:investmentDiscretion").text = str(row["Investment Discretion"]).strip()
         
+        # Optional other manager field with namespace prefix
         if pd.notnull(row.get("Other Managers", None)):
             SubElement(info_table, "ns1:otherManager").text = str(int(row["Other Managers"])).strip()
         
-        # Nested element for voting authority
+        # Voting authority with namespace prefix
         voting_authority = SubElement(info_table, "ns1:votingAuthority")
         SubElement(voting_authority, "ns1:Sole").text = str(int(row["Sole"])).strip()
         SubElement(voting_authority, "ns1:Shared").text = str(int(row["Shared"])).strip()
@@ -60,14 +68,28 @@ def create_perfect_edgar_xml(input_xlsx, output_xml):
     print(f"Perfect EDGAR-compliant XML file created: {output_xml}")
 
 def generate_output_filename(input_filename):
-    """Generate output filename in the format 'zen1q2413f.xml'"""
-    # Remove file extension and spaces
+    """Generate output filename in SEC-compliant format"""
+    # Convert input filename to lowercase immediately
+    input_filename = input_filename.lower()
+    
+    # Extract base name without extension
     base_name = os.path.splitext(input_filename)[0]
-    # Convert to lowercase and remove special characters
-    clean_name = re.sub(r"[^a-z0-9]", "", base_name.lower())
-    # Ensure the filename starts with 'zen'
-    if not clean_name.startswith("zen"):
-        clean_name = "zen" + clean_name
+    
+    # Remove special characters and spaces
+    clean_name = re.sub(r"[^a-z0-9]", "", base_name)
+    
+    # Ensure the filename ends with '13f'
+    if not clean_name.endswith("13f"):
+        clean_name += "13f"
+    
+    # Add quarter and year if not present
+    if not re.search(r"q\d{2}", clean_name):
+        # Get current quarter and year
+        today = pd.Timestamp.today()
+        quarter = (today.month - 1) // 3 + 1
+        year = today.year % 100
+        clean_name += f"q{quarter}{year:02d}"
+    
     return f"{clean_name}.xml"
 
 def process_all_xlsx_in_directory():
