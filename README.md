@@ -1,6 +1,17 @@
-# EDGAR Form 13F XML Converter
+# EDGAR Form 13F XML Converter - Version 1.1 (Stable Release)
 
-This application converts Excel files containing stock position data into properly formatted XML files compliant with the SEC's EDGAR Form 13F filing requirements.
+This version includes:
+- Stable Excel to EDGAR XML conversion functionality
+- Proper deployment configuration for Railway
+- Complete documentation and sample files
+- Production-ready codebase
+
+## Deployment Status
+- Current Version: 1.1
+- Deployment URL: https://edgar13fconverter2-production.up.railway.app
+- Last Deployment: Successful
+- Deployment Method: GitHub-based continuous deployment
+- Deployment Configuration: Verified and stable
 
 ## Repository
 https://github.com/stuinfla/Edgar13FConverter2
