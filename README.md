@@ -68,6 +68,12 @@ This application uses GitHub-based deployment to Railway. The deployment process
 4. Access the deployed application at:
    https://edgar13fconverter2-production.up.railway.app
 
+5. Monitor deployment status:
+   - Railway dashboard: https://railway.com/project/1276b3a3-c08e-41cc-9744-b64ca1abd7a8/service/e3f7c381-d089-47b3-9f6e-8b08532e06ac?environmentId=b80de425-ea66-4c46-b813-56ec84a45159
+   - Verify deployment status is "Successful"
+   - Check logs for any errors
+   - Confirm service status is "Running"
+
 ## Testing
 Sample input/output files are provided:
 - Input/Zeno 13F 1Q '24.xlsx
