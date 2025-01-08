@@ -90,7 +90,14 @@ def generate_output_filename(input_filename):
         year = today.year % 100
         clean_name += f"q{quarter}{year:02d}"
     
-    return f"{clean_name}.xml"
+    # Ensure final filename is lowercase
+    output_filename = f"{clean_name}.xml".lower()
+    
+    # Validate filename is lowercase
+    if output_filename != output_filename.lower():
+        raise ValueError(f"Generated filename contains uppercase characters: {output_filename}")
+    
+    return output_filename
 
 def process_all_xlsx_in_directory():
     # Get all .xlsx files in the Input directory
@@ -106,8 +113,9 @@ def process_all_xlsx_in_directory():
         # Generate output filename
         base_name = os.path.basename(xlsx_file)
         output_filename = generate_output_filename(base_name)
-        output_xml = os.path.join("Output", output_filename)
+        output_xml = os.path.join("Output", output_filename).lower()
         print(f"Generated output filename: {output_filename}")
+        print(f"Final output path: {output_xml}")
         
         # Transform the .xlsx file to .xml
         create_perfect_edgar_xml(xlsx_file, output_xml)

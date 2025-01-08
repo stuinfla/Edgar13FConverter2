@@ -43,14 +43,14 @@ def convert():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             
-            # Convert to XML
-            output_filename = filename.replace('.xlsx', '.xml')
+            # Convert to XML with lowercase filename
+            output_filename = filename.lower().replace('.xlsx', '.xml')
             output_path = os.path.join(app.config['UPLOAD_FOLDER'], output_filename)
             
             try:
                 convert_xlsx_to_xml(filepath, output_path)
                 original_filename = secure_filename(file.filename)
-                flash(f'Successfully converted {original_filename} to {output_filename}', 'success')
+                flash(f'Successfully converted {original_filename} to {output_filename.lower()}', 'success')
                 return render_template('index.html', 
                                     converted_file=output_filename,
                                     original_filename=original_filename)
