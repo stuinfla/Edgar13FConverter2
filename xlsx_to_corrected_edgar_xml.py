@@ -1,9 +1,9 @@
-
 import pandas as pd
 from xml.etree.ElementTree import Element, SubElement, ElementTree, tostring
 import os
 import glob
 import xml.dom.minidom as minidom
+import re
 
 def create_perfect_edgar_xml(input_xlsx, output_xml):
     # Read the Excel file
@@ -59,14 +59,33 @@ def create_perfect_edgar_xml(input_xlsx, output_xml):
         file.write(pretty_xml.strip())
     print(f"Perfect EDGAR-compliant XML file created: {output_xml}")
 
+def generate_output_filename(input_filename):
+    """Generate output filename in the format 'zen1q2413f.xml'"""
+    # Remove file extension and spaces
+    base_name = os.path.splitext(input_filename)[0]
+    # Convert to lowercase and remove special characters
+    clean_name = re.sub(r"[^a-z0-9]", "", base_name.lower())
+    # Ensure the filename starts with 'zen'
+    if not clean_name.startswith("zen"):
+        clean_name = "zen" + clean_name
+    return f"{clean_name}.xml"
+
 def process_all_xlsx_in_directory():
     # Get all .xlsx files in the Input directory
     xlsx_files = glob.glob("Input/*.xlsx")
     
     for xlsx_file in xlsx_files:
-        # Generate the output .xml file name in the Output directory
+        print(f"\nProcessing file: {xlsx_file}")
+        
+        # Read the file
+        df = pd.read_excel(xlsx_file)
+        print("Columns found in Excel file:", df.columns.tolist())
+        
+        # Generate output filename
         base_name = os.path.basename(xlsx_file)
-        output_xml = os.path.join("Output", os.path.splitext(base_name)[0] + ".xml")
+        output_filename = generate_output_filename(base_name)
+        output_xml = os.path.join("Output", output_filename)
+        print(f"Generated output filename: {output_filename}")
         
         # Transform the .xlsx file to .xml
         create_perfect_edgar_xml(xlsx_file, output_xml)
