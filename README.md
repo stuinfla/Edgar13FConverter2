@@ -1,20 +1,13 @@
 # EDGAR Form 13F XML Converter - Version 1.1 (Stable Release)
 
-This version includes:
+## Project Purpose
+This application was developed to streamline the process of converting Excel-based stock position data into SEC-compliant EDGAR XML format for Form 13F filings. The goal is to provide institutional investment managers with a reliable, automated solution that ensures compliance with SEC regulations while reducing manual effort and potential errors.
+
+## Version 1.1 Highlights
 - Stable Excel to EDGAR XML conversion functionality
 - Proper deployment configuration for Railway
 - Complete documentation and sample files
 - Production-ready codebase
-
-## Deployment Status
-- Current Version: 1.1
-- Deployment URL: https://edgar13fconverter2-production.up.railway.app
-- Last Deployment: Successful
-- Deployment Method: GitHub-based continuous deployment
-- Deployment Configuration: Verified and stable
-
-## Repository
-https://github.com/stuinfla/Edgar13FConverter2
 
 ## Key Features
 - Converts .xlsx files to EDGAR-compliant XML
@@ -22,6 +15,18 @@ https://github.com/stuinfla/Edgar13FConverter2
 - Uses the eis_13FDocument.xsd schema for validation
 - Web interface for easy file upload and conversion
 - Automatic cleanup of temporary files
+
+## Development History
+This project was developed through an iterative process:
+1. Initial prototype development
+2. Extensive testing with sample data
+3. Compliance verification with SEC specifications
+4. Deployment configuration and optimization
+5. Version 1.0 release and testing
+6. Version 1.1 stabilization and production deployment
+
+## Repository
+https://github.com/stuinfla/Edgar13FConverter2
 
 ## Requirements
 - Python 3.9+
@@ -92,6 +97,10 @@ Sample input/output files are provided:
 - Output/zeno1q2413f.xml
 
 ## Documentation
+The complete technical specifications for the application are permanently stored in the Conversion Specs folder:
 - Conversion specs/EDGAR Form 13F XML Technical Specification.pdf
 - Conversion specs/eis_13FDocument.xsd
+
+Additional documentation:
 - README.md (this file)
+- Sample input/output files in Input/ and Output/ folders
