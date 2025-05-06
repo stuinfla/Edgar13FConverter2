@@ -5,9 +5,12 @@ This application was developed to streamline the process of converting Excel-bas
 
 ## Version 1.1 Highlights
 - Stable Excel to EDGAR XML conversion functionality
+- Enhanced robustness in handling diverse Excel column names and structures
+- Improved error reporting for missing data
 - Proper deployment configuration for Railway
 - Complete documentation and sample files
 - Production-ready codebase
+- Automatic cleanup of temporary files
 
 ## Key Features
 - Converts .xlsx files to EDGAR-compliant XML
@@ -15,6 +18,13 @@ This application was developed to streamline the process of converting Excel-bas
 - Uses the eis_13FDocument.xsd schema for validation
 - Web interface for easy file upload and conversion
 - Automatic cleanup of temporary files
+
+### Enhanced Robustness (May 2025 Updates)
+To address real-world variations in client Excel files, the converter has been significantly upgraded for flexibility:
+- **Flexible Column Name Recognition:** The application now intelligently searches for required data columns using not only their primary expected names (e.g., "Shares/Principal") but also a configurable list of common synonyms (e.g., "Shrs/Prn Typ", "Type"). This matching is case-insensitive.
+- **Positional Fallback for Critical Data:** For essential fields like "Shares/Principal", "Investment Discretion", and voting authorities ("Sole", "Shared", "None"), if no matching header is found (even after checking synonyms), the system can fall back to using predefined positional column names (e.g., "Unnamed: 5", "Unnamed: 6") if such columns exist in the input file.
+- **Graceful Handling of Missing "None" Voting Data:** The "None" voting authority column is now treated as optional. If this column (or its equivalent) is not found in the Excel file, its value will default to `0` for all securities in the generated XML, allowing the conversion to proceed without error.
+- **Clearer Error Messaging:** If essential required columns are still missing after all checks, the application now provides a detailed error message listing exactly which columns (and their expected synonyms/fallbacks) could not be located.
 
 ## Development History
 This project was developed through an iterative process:
