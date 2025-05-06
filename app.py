@@ -50,6 +50,8 @@ def convert():
             file.save(filepath)
             
             output_xml_filename = None
+            xml_is_valid = None # For 6151 validation status
+            xml_validation_errors = [] # For 6151 validation errors
             
             try:
                 if conversion_type == '13F':
@@ -67,17 +69,26 @@ def convert():
                         flash('Firm Name, Year, and Quarter are required for 6151 conversion.', 'error')
                         return redirect(url_for('index'))
                     
-                    # perform_6151_conversion returns the full path to the output file
-                    # The output filename is derived from the input filename by perform_6151_conversion
-                    generated_xml_full_path = perform_6151_conversion(
+                    generated_xml_full_path, xml_is_valid, xml_validation_errors = perform_6151_conversion(
                         excel_filepath=filepath, 
                         output_dir=app.config['UPLOAD_FOLDER'], 
                         firm_name=firm_name, 
                         year=year, 
                         qtr=qtr
                     )
-                    output_xml_filename = os.path.basename(generated_xml_full_path)
-                    flash(f'Successfully converted (6151) {original_filename_secure} to {output_xml_filename}', 'success')
+
+                    if generated_xml_full_path:
+                        output_xml_filename = os.path.basename(generated_xml_full_path)
+                        if xml_is_valid:
+                            flash(f'Successfully converted (6151) {original_filename_secure} to {output_xml_filename}. XML is valid.', 'success')
+                        else:
+                            error_summary = "; ".join(xml_validation_errors[:3]) # Show first 3 errors
+                            flash(f'Converted (6151) {original_filename_secure} to {output_xml_filename}, but XML validation failed: {error_summary}', 'warning')
+                    else:
+                        # XML creation itself failed
+                        error_summary = "; ".join(xml_validation_errors[:3]) if xml_validation_errors else "Unknown error during XML creation."
+                        flash(f'Failed to convert (6151) {original_filename_secure}: {error_summary}', 'error')
+                        return redirect(url_for('index')) # Redirect if file creation failed
                 
                 else:
                     flash('Invalid conversion type selected.', 'error')
@@ -86,7 +97,9 @@ def convert():
                 return render_template('index.html', 
                                      converted_file=output_xml_filename,
                                      original_filename=original_filename_secure,
-                                     conversion_type_processed=conversion_type) # Pass type for display
+                                     conversion_type_processed=conversion_type,
+                                     xml_is_valid=xml_is_valid, # Pass validation status to template
+                                     xml_validation_errors=xml_validation_errors) # Pass errors to template
             
             except Exception as e:
                 flash(f'Conversion error for {conversion_type}: {str(e)}', 'error')

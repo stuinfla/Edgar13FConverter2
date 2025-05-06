@@ -358,34 +358,47 @@ def parse_excel_data(excel_filepath, material_aspects_text, firm_name_param, rep
 
 # --- XSD Validation Function ---
 def validate_xml_against_xsd(xml_filepath, xsd_filepath):
-    """Validates an XML file against an XSD schema."""
-    if not os.path.exists(xsd_filepath):
-        print(f"XSD file not found: {xsd_filepath}")
-        return False
+    """Validates an XML file against an XSD schema.
+
+    Args:
+        xml_filepath (str): The path to the XML file to validate.
+        xsd_filepath (str): The path to the XSD schema file.
+
+    Returns:
+        tuple: (bool, list) where bool is True if valid, False otherwise,
+               and list contains error messages if invalid, or is empty if valid.
+    """
     if not os.path.exists(xml_filepath):
-        print(f"XML file not found: {xml_filepath}")
-        return False
+        # print(f"Error: XML file not found at {xml_filepath}") # Keep for debugging if needed
+        return False, [f"XML file not found at {xml_filepath}"]
+    if not os.path.exists(xsd_filepath):
+        # print(f"Error: XSD schema file not found at {xsd_filepath}") # Keep for debugging if needed
+        return False, [f"XSD schema file not found at {xsd_filepath}"]
 
     try:
-        xmlschema_doc = etree.parse(xsd_filepath)
-        xmlschema = etree.XMLSchema(xmlschema_doc)
         xml_doc = etree.parse(xml_filepath)
-        xmlschema.assertValid(xml_doc)  # Throws an exception if invalid
-        print(f"XML VALIDATION SUCCESSFUL: '{xml_filepath}' is valid against '{xsd_filepath}'.")
-        return True
-    except etree.XMLSchemaParseError as e:
-        print(f"XSD Schema Parse Error: {e}")
-        print(f"Details: {e.error_log}")
-        return False
-    except etree.DocumentInvalid as e:
-        print(f"XML VALIDATION FAILED: '{xml_filepath}' is not valid against '{xsd_filepath}'.")
-        print("Validation Errors:")
-        for error in e.error_log:
-            print(f"  Line {error.line}, Column {error.column}: {error.message} (Domain: {error.domain_name}, Type: {error.type_name})")
-        return False
+        xsd_doc = etree.parse(xsd_filepath)
+        xmlschema = etree.XMLSchema(xsd_doc)
+
+        is_valid = xmlschema.validate(xml_doc)
+
+        if is_valid:
+            # print(f"Validation successful: '{os.path.basename(xml_filepath)}' is valid against '{os.path.basename(xsd_filepath)}'.")
+            return True, []
+        else:
+            # print(f"Validation failed: '{os.path.basename(xml_filepath)}' is invalid against '{os.path.basename(xsd_filepath)}'.")
+            # print("Validation Errors:")
+            error_messages = []
+            for error in xmlschema.error_log:
+                # print(f"  - Line {error.line}, Column {error.column}: {error.message} (Domain: {error.domain_name}, Type: {error.type_name})")
+                error_messages.append(f"Line {error.line}, Col {error.column}: {error.message}")
+            return False, error_messages
+    except etree.XMLSyntaxError as e:
+        # print(f"XML Syntax Error: Could not parse XML file '{os.path.basename(xml_filepath)}'. Error: {e}")
+        return False, [f"XML Syntax Error: {e}"]
     except Exception as e:
-        print(f"An unexpected error occurred during XML validation: {e}")
-        return False
+        # print(f"An unexpected error occurred during validation: {e}")
+        return False, [f"Unexpected validation error: {e}"]
 
 # --- Main XML Generation Function ---
 def create_finra_6151_xml(excel_filepath, output_xml_filepath, 
@@ -523,33 +536,73 @@ def create_finra_6151_xml(excel_filepath, output_xml_filepath,
     print(f"Successfully generated XML: {output_xml_filepath}")
 
     # 7. Validate the generated XML against the XSD
-    validate_xml_against_xsd(output_xml_filepath, XSD_FILE_PATH)
+    is_valid, errors = validate_xml_against_xsd(output_xml_filepath, XSD_FILE_PATH)
+    if is_valid:
+        print("XML validation successful.")
+    else:
+        print("XML validation failed. Errors:")
+        for err in errors:
+            print(f"- {err}")
 
 # --- New Wrapper Function for Module Usage ---
 def perform_6151_conversion(excel_filepath, output_dir, firm_name, year, qtr):
-    """ 
+    """
     Callable function to perform the 6151 conversion.
     Manages file paths and calls the core XML creation logic.
-    Returns the path to the generated XML file.
+    Returns a tuple: (path_to_xml_file, validation_status, validation_errors).
+    validation_status is True if valid, False otherwise.
+    validation_errors is a list of error messages if invalid, or an empty list if valid.
     """
-    
-    base_excel_name = os.path.splitext(os.path.basename(excel_filepath))[0]
-    output_filename = f"{base_excel_name}.xml"
-    output_path = os.path.join(output_dir, output_filename)
+    print(f"Starting 6151 conversion for: {excel_filepath}")
+    print(f"Output directory: {output_dir}")
+    print(f"Firm: {firm_name}, Year: {year}, Quarter: {qtr}")
 
-    # This was previously hardcoded in main(). Keep it here for now.
-    # Future: Consider making this configurable or derived from Excel.
-    material_aspects_from_excel_footer = "Outset does not have a profit sharing arrangement with or receive rebates or payments for order flow from any of the above venues/market centers."
-    
-    create_finra_6151_xml(
-        excel_filepath=excel_filepath,
-        output_xml_filepath=output_path,
-        firm_name=firm_name,
-        reporting_year=int(year), # Ensure year is int
-        reporting_quarter=int(qtr), # Ensure qtr is int
-        material_aspects_text=material_aspects_from_excel_footer
+    # Default material aspects text - consider making this configurable if needed
+    material_aspects_text = (
+        "The Firm's order routing decisions are based on a variety of factors, including the size and type of order, "
+        "the speed and likelihood of execution, the availability of price improvement, and the cost of execution. "
+        "The Firm regularly reviews the execution quality obtained from different market centers and makes adjustments "
+        "to its routing practices as necessary. Specific details regarding any payment for order flow arrangements "
+        "or profit-sharing relationships are disclosed in the links provided for each venue."
     )
-    return output_path
+
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Construct output XML filepath
+    base_filename = os.path.splitext(os.path.basename(excel_filepath))[0]
+    # A more robust way to name the output, incorporating firm, year, qtr
+    # Example: FirmName_606_NMS_YYYY_QQ.xml
+    # For now, let's stick to a simpler derivation and ensure it uses the provided params
+    # Ensure CIK (if available and part of firm_name) or a sanitized firm_name is used
+    sanitized_firm_name = "".join(c if c.isalnum() else "_" for c in firm_name.split(" ")[0]) # First word, alphanumeric
+    output_xml_filename = f"{sanitized_firm_name}_606_NMS_{year}_Q{qtr}.xml"
+    output_xml_filepath = os.path.join(output_dir, output_xml_filename)
+
+    print(f"Output XML will be: {output_xml_filepath}")
+
+    try:
+        # Call the main XML creation function
+        create_finra_6151_xml(
+            excel_filepath=excel_filepath,
+            output_xml_filepath=output_xml_filepath,
+            firm_name=firm_name,
+            reporting_year=str(year),
+            reporting_quarter=str(qtr),
+            material_aspects_text=material_aspects_text
+        )
+        print(f"Successfully generated XML: {output_xml_filepath}")
+
+        # Validate the generated XML
+        print(f"Validating '{output_xml_filepath}' against XSD: '{XSD_FILE_PATH}'")
+        is_valid, errors = validate_xml_against_xsd(output_xml_filepath, XSD_FILE_PATH)
+
+        return output_xml_filepath, is_valid, errors
+
+    except Exception as e:
+        print(f"Error during 6151 conversion process: {e}")
+        # In case of an error during XML creation itself, we can't validate
+        return None, False, [f"Error during XML creation: {e}"]
 
 # --- Main execution --- 
 def main():
@@ -568,7 +621,7 @@ def main():
 
     try:
         # Call the refactored conversion function
-        output_xml_file = perform_6151_conversion(
+        output_xml_file, is_valid, errors = perform_6151_conversion(
             excel_filepath=args.excel_path,
             output_dir=args.output_dir,
             firm_name=args.firm_name, 

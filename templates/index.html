@@ -105,6 +105,27 @@
                                                     <hr>
                                                 {% endif %}
                                                 {{ message }}
+                                                {% if conversion_type_processed == '6151' and (xml_is_valid is not none or xml_validation_errors) %}
+                                                    <div class="mt-3">
+                                                        <h5>XML Validation Status:</h5>
+                                                        {% if xml_is_valid %}
+                                                            <p class="text-success mb-1"><strong>Verified <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></strong></p>
+                                                        {% elif xml_is_valid == False %}
+                                                            <p class="text-danger mb-1"><strong>Validation Failed <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/></svg></strong></p>
+                                                            {% if xml_validation_errors %}
+                                                                <p class="mb-1"><strong>Errors:</strong></p>
+                                                                <ul class="list-unstyled bg-light p-2 rounded" style="font-size: 0.85em; max-height: 100px; overflow-y: auto; border: 1px solid #dee2e6;">
+                                                                    {% for error in xml_validation_errors %}
+                                                                        <li><small><code>{{ error }}</code></small></li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            {% endif %}
+                                                        {% else %}
+                                                             <p class="text-muted mb-1">Validation status not available.</p>
+                                                        {% endif %}
+                                                    </div>
+                                                    <hr>
+                                                {% endif %}
                                                 {% if category == 'success' and converted_file %}
                                                 <div class="mt-3 d-grid gap-2">
                                                     <a href="/download/{{ converted_file }}" class="btn btn-success">
@@ -226,5 +247,10 @@
             // we might want to trigger parseFilenameAndPreFill here too, but browsers usually clear file input on refresh for security.
         });
     </script>
+
+    <footer class="text-center mt-5 mb-3">
+        <p class="text-muted"><small>&copy; 2025 ISO Vision LLC.</small></p>
+    </footer>
+
 </body>
 </html>
