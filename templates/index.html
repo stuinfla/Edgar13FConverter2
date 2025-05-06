@@ -3,31 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDGAR 13F Converter</title>
+    <title>FINRA Excel to XML Converter</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        :root {
+            --theme-blue: #0d6efd; /* Bootstrap primary blue */
+            --theme-purple: #6f42c1; /* Bootstrap purple */
+        }
+        .card-header.bg-theme-blue {
+            background-color: var(--theme-blue) !important;
+        }
+        .card-header.bg-theme-purple {
+            background-color: var(--theme-purple) !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
-                        <h2 class="text-center">Version 1.7 EDGAR® Form 13F Converter</h2>
-                        <h4 class="text-center">XML Technical Specification - January 2023</h4>
+                    <div class="card-header bg-theme-blue text-white" id="pageHeader">
+                        <h2 class="text-center">FINRA Excel to XML Converter</h2>
+                        <h4 class="text-center" id="subtitle">EDGAR® Form 13F (XML Technical Specification - January 2023)</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <!-- Left Column - Input -->
                             <div class="col-md-6 border-end">
-                                <h4 class="mb-3">Input Excel File</h4>
-                                <form action="/convert" method="POST" enctype="multipart/form-data">
+                                <h4 class="mb-3">Conversion Input</h4>
+                                <form action="/convert" method="POST" enctype="multipart/form-data" id="conversionForm">
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Conversion Type:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="conversion_type" id="type13F" value="13F" checked>
+                                            <label class="form-check-label" for="type13F" style="color: var(--theme-blue); font-weight: bold;">
+                                                EDGAR® Form 13F (XML Technical Specification - January 2023)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="conversion_type" id="type6151" value="6151">
+                                            <label class="form-check-label" for="type6151" style="color: var(--theme-purple); font-weight: bold;">
+                                                FINRA Rule 6151 (Held Order Routing Report)
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Excel File (.xlsx)</label>
                                         <input class="form-control" type="file" id="formFile" name="file" accept=".xlsx" required>
                                     </div>
+
+                                    <!-- Fields for 6151, initially hidden -->
+                                    <div id="fields6151" style="display: none;">
+                                        <div class="mb-3">
+                                            <label for="firmName" class="form-label">Firm Name (for 6151):</label>
+                                            <input type="text" class="form-control" id="firmName" name="firm_name">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="reportingYear" class="form-label">Reporting Year (for 6151):</label>
+                                                <input type="number" class="form-control" id="reportingYear" name="year" placeholder="YYYY">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="reportingQuarter" class="form-label">Reporting Quarter (for 6151):</label>
+                                                <select class="form-select" id="reportingQuarter" name="qtr">
+                                                    <option value="">Select Quarter...</option>
+                                                    <option value="1">Q1</option>
+                                                    <option value="2">Q2</option>
+                                                    <option value="3">Q3</option>
+                                                    <option value="4">Q4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary btn-lg">Convert to EDGAR XML</button>
+                                        <button type="submit" class="btn btn-primary btn-lg" id="convertButton">Convert to 13F XML</button>
                                     </div>
                                 </form>
                             </div>
@@ -54,7 +108,7 @@
                                                 {% if category == 'success' and converted_file %}
                                                 <div class="mt-3 d-grid gap-2">
                                                     <a href="/download/{{ converted_file }}" class="btn btn-success">
-                                                        <i class="bi bi-download"></i> Download XML
+                                                        <i class="bi bi-download"></i> Download {{ conversion_type_processed if conversion_type_processed else 'XML' }}
                                                     </a>
                                                     <a href="/" class="btn btn-secondary">
                                                         <i class="bi bi-arrow-clockwise"></i> Convert Another File
@@ -74,5 +128,103 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const type13F = document.getElementById('type13F');
+            const type6151 = document.getElementById('type6151');
+            const fields6151 = document.getElementById('fields6151');
+            const firmNameInput = document.getElementById('firmName');
+            const yearInput = document.getElementById('reportingYear');
+            const qtrInput = document.getElementById('reportingQuarter');
+            const convertButton = document.getElementById('convertButton');
+            const subtitle = document.getElementById('subtitle');
+            const pageHeader = document.getElementById('pageHeader'); // Get the header element
+            const formFile = document.getElementById('formFile'); // Get the file input element
+
+            function parseFilenameAndPreFill() {
+                if (!type6151.checked || !formFile.files || formFile.files.length === 0) {
+                    return;
+                }
+
+                let filename = formFile.files[0].name;
+                // Remove .xlsx extension
+                if (filename.toLowerCase().endsWith('.xlsx')) {
+                    filename = filename.substring(0, filename.length - 5);
+                }
+
+                let parsedYear = "";
+                let parsedQuarter = "";
+                let parsedFirmName = filename; // Start with the full filename (minus extension)
+
+                // Try to extract Year (e.g., 2023)
+                const yearMatch = filename.match(/(20\d{2})/);
+                if (yearMatch) {
+                    parsedYear = yearMatch[1];
+                    // Remove year from firm name candidate
+                    parsedFirmName = parsedFirmName.replace(parsedYear, "");
+                }
+
+                // Try to extract Quarter (e.g., Q1, 1Q -> 1)
+                const quarterMatchQFirst = filename.match(/Q([1-4])/i);
+                const quarterMatchNumFirst = filename.match(/([1-4])Q/i);
+                if (quarterMatchQFirst) {
+                    parsedQuarter = quarterMatchQFirst[1];
+                    parsedFirmName = parsedFirmName.replace(quarterMatchQFirst[0], ""); // Remove Qx
+                } else if (quarterMatchNumFirst) {
+                    parsedQuarter = quarterMatchNumFirst[1];
+                    parsedFirmName = parsedFirmName.replace(quarterMatchNumFirst[0], ""); // Remove xQ
+                }
+
+                // Clean up firm name: remove common separators, 'Report', 'Data', etc.
+                parsedFirmName = parsedFirmName.replace(/Report|Data|Holdings|Portfolio/ig, "");
+                parsedFirmName = parsedFirmName.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim(); // Replace separators with space, collapse multiple spaces
+
+                if (parsedFirmName) firmNameInput.value = parsedFirmName;
+                if (parsedYear) yearInput.value = parsedYear;
+                if (parsedQuarter) qtrInput.value = parsedQuarter;
+            }
+
+            function toggle6151Fields() {
+                const is6151 = type6151.checked;
+                const themeBlue = getComputedStyle(document.documentElement).getPropertyValue('--theme-blue').trim();
+                const themePurple = getComputedStyle(document.documentElement).getPropertyValue('--theme-purple').trim();
+
+                fields6151.style.display = is6151 ? 'block' : 'none';
+                firmNameInput.required = is6151;
+                yearInput.required = is6151;
+                qtrInput.required = is6151;
+
+                if (is6151) {
+                    convertButton.textContent = 'Convert to 6151 XML';
+                    subtitle.textContent = 'FINRA Rule 6151 (Held Order Routing Report)';
+                    pageHeader.classList.remove('bg-theme-blue');
+                    pageHeader.classList.add('bg-theme-purple');
+                    convertButton.style.backgroundColor = themePurple;
+                    convertButton.style.borderColor = themePurple;
+                } else {
+                    convertButton.textContent = 'Convert to 13F XML';
+                    subtitle.textContent = 'EDGAR® Form 13F (XML Technical Specification - January 2023)';
+                    pageHeader.classList.remove('bg-theme-purple');
+                    pageHeader.classList.add('bg-theme-blue');
+                    convertButton.style.backgroundColor = themeBlue;
+                    convertButton.style.borderColor = themeBlue;
+                }
+                // Ensure btn-primary is removed if we are fully controlling colors via JS for this button
+                // or ensure our styles are specific enough. For now, direct style manipulation will override.
+            }
+
+            type13F.addEventListener('change', toggle6151Fields);
+            type6151.addEventListener('change', () => {
+                toggle6151Fields();
+                parseFilenameAndPreFill(); // Also attempt to pre-fill when 6151 is selected
+            });
+            formFile.addEventListener('change', parseFilenameAndPreFill); // Attempt to pre-fill when file changes
+
+            // Initial check in case of page refresh or pre-selection
+            toggle6151Fields();
+            // If 6151 is checked on load and a file is already selected (e.g. browser remembering state),
+            // we might want to trigger parseFilenameAndPreFill here too, but browsers usually clear file input on refresh for security.
+        });
+    </script>
 </body>
 </html>

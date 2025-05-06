@@ -6,13 +6,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>United States</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -22,13 +22,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -38,13 +38,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -54,13 +54,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -70,13 +70,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -86,13 +86,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -102,13 +102,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -118,13 +118,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -134,13 +134,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -150,13 +150,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -166,13 +166,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -182,13 +182,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -198,13 +198,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -214,13 +214,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -230,13 +230,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -246,13 +246,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -262,13 +262,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -278,13 +278,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -294,13 +294,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -310,13 +310,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -326,13 +326,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -342,13 +342,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -358,13 +358,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -374,13 +374,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -390,13 +390,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -406,13 +406,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
@@ -422,13 +422,13 @@
 		<ns1:cusip>nan</ns1:cusip>
 		<ns1:value>0</ns1:value>
 		<ns1:shrsOrPrnAmt>
-			<ns1:sshPrnamt>0</ns1:sshPrnamt>
+			<ns1:sshPrnamt>nan</ns1:sshPrnamt>
 			<ns1:sshPrnamtType>nan</ns1:sshPrnamtType>
 		</ns1:shrsOrPrnAmt>
 		<ns1:investmentDiscretion>nan</ns1:investmentDiscretion>
 		<ns1:votingAuthority>
-			<ns1:Sole>0</ns1:Sole>
-			<ns1:Shared>0</ns1:Shared>
+			<ns1:Sole>nan</ns1:Sole>
+			<ns1:Shared>nan</ns1:Shared>
 			<ns1:None>0</ns1:None>
 		</ns1:votingAuthority>
 	</ns1:infoTable>
