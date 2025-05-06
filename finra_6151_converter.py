@@ -8,8 +8,11 @@ import argparse
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-# Path to your XSD schema file
-XSD_FILE_PATH = "/Users/stuartkerr/Library/CloudStorage/OneDrive-Personal/Code/EXCEL TO EDGAR XML/Finra 6151 requirements/oh-20191231.xsd"
+# Determine the absolute path to the directory where this script is located
+_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Path to your XSD schema file, now relative to the script's location
+# Assumes 'schemas' directory is at the same level as this script file.
+XSD_FILE_PATH = os.path.join(_BASE_DIR, 'schemas', 'oh-20191231.xsd')
 
 # --- NEW Helper functions for formatting based on XSD types ---
 def format_pct_or_nm(value) -> str:
