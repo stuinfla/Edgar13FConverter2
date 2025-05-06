@@ -1,47 +1,57 @@
-# EDGAR Form 13F XML Converter - Version 1.1 (Stable Release)
+# EDGAR Form 13F & FINRA Rule 6151 XML Converter - Version 1.2 (Enhanced Functionality)
 
 ## Project Purpose
-This application was developed to streamline the process of converting Excel-based stock position data into SEC-compliant EDGAR XML format for Form 13F filings. The goal is to provide institutional investment managers with a reliable, automated solution that ensures compliance with SEC regulations while reducing manual effort and potential errors.
+This application was developed to streamline the process of converting Excel-based financial data into SEC-compliant EDGAR XML format for Form 13F filings and FINRA-compliant XML for Rule 6151 (Held Order Routing Reports). The goal is to provide institutional investment managers and broker-dealers with a reliable, automated solution that ensures compliance with regulatory requirements while reducing manual effort and potential errors.
 
-## Version 1.1 Highlights
-- Stable Excel to EDGAR XML conversion functionality
-- Enhanced robustness in handling diverse Excel column names and structures
-- Improved error reporting for missing data
-- Proper deployment configuration for Railway
-- Complete documentation and sample files
-- Production-ready codebase
-- Automatic cleanup of temporary files
+## Version 1.2 Highlights
+- **Dual Conversion Capability:** Supports both EDGAR Form 13F and FINRA Rule 6151 XML conversions.
+- **FINRA Rule 6151 Support:**
+    - Converts Excel data for Held Order Routing Reports to compliant XML.
+    - Validates generated 6151 XML against the official FINRA `oh-20191231.xsd` schema.
+    - User interface for selecting conversion type and providing 6151-specific inputs (Firm Name, Year, Quarter).
+    - Displays XML validation status (Verified/Failed with errors) directly in the UI for 6151 reports.
+- Stable Excel to EDGAR XML conversion functionality (from v1.1).
+- Enhanced robustness in handling diverse Excel column names and structures for 13F (from v1.1).
+- Improved error reporting for missing data.
+- Proper deployment configuration for Railway.
+- Complete documentation and sample files.
+- Production-ready codebase.
+- Automatic cleanup of temporary files.
+- Copyright notice added to the user interface.
 
 ## Key Features
-- Converts .xlsx files to EDGAR-compliant XML
-- Validates against the official EDGAR Form 13F XML Technical Specification
-- Uses the eis_13FDocument.xsd schema for validation
-- Web interface for easy file upload and conversion
-- Automatic cleanup of temporary files
 
-### Enhanced Robustness (May 2025 Updates)
-To address real-world variations in client Excel files, the converter has been significantly upgraded for flexibility:
-- **Flexible Column Name Recognition:** The application now intelligently searches for required data columns using not only their primary expected names (e.g., "Shares/Principal") but also a configurable list of common synonyms (e.g., "Shrs/Prn Typ", "Type"). This matching is case-insensitive.
-- **Positional Fallback for Critical Data:** For essential fields like "Shares/Principal", "Investment Discretion", and voting authorities ("Sole", "Shared", "None"), if no matching header is found (even after checking synonyms), the system can fall back to using predefined positional column names (e.g., "Unnamed: 5", "Unnamed: 6") if such columns exist in the input file.
-- **Graceful Handling of Missing "None" Voting Data:** The "None" voting authority column is now treated as optional. If this column (or its equivalent) is not found in the Excel file, its value will default to `0` for all securities in the generated XML, allowing the conversion to proceed without error.
-- **Clearer Error Messaging:** If essential required columns are still missing after all checks, the application now provides a detailed error message listing exactly which columns (and their expected synonyms/fallbacks) could not be located.
+### General
+- Web interface for easy file upload and conversion type selection.
+- Automatic cleanup of temporary uploaded files.
+
+### EDGAR Form 13F Conversion
+- Converts .xlsx files to EDGAR-compliant XML for Form 13F.
+- Validates against the official EDGAR Form 13F XML Technical Specification.
+- Uses the `eis_13FDocument.xsd` schema for validation.
+- **Flexible Column Name Recognition:** Intelligently searches for required data columns using primary names and common synonyms (case-insensitive).
+- **Positional Fallback:** For critical 13F data, can fall back to predefined positional column names if headers are not found.
+- **Graceful Handling of Missing "None" Voting Data:** Defaults to `0` if the "None" voting authority column is missing.
+- **Clearer Error Messaging:** Detailed error messages for missing essential 13F columns.
+
+### FINRA Rule 6151 Conversion (New in v1.2)
+- Converts .xlsx files (formatted for 6151) to FINRA Rule 6151 compliant XML for Held Order Routing Reports.
+- Validates generated XML against the official FINRA `oh-20191231.xsd` schema.
+- Accepts Firm Name, Reporting Year, and Reporting Quarter as inputs for 6151 reports.
+- Displays XML validation status (Verified/Failed with errors) in the user interface post-conversion.
 
 ## Development History
 This project was developed through an iterative process:
-1. Initial prototype development
-2. Extensive testing with sample data
-3. Compliance verification with SEC specifications
-4. Deployment configuration and optimization
-5. Version 1.0 release and testing
-6. Version 1.1 stabilization and production deployment
+1. Initial prototype development for 13F.
+2. Extensive testing with sample 13F data.
+3. Compliance verification with SEC specifications for 13F.
+4. Deployment configuration and optimization.
+5. Version 1.0 release and testing (13F).
+6. Version 1.1 stabilization and production deployment (13F robustness enhancements).
+7. Version 1.2 addition of FINRA Rule 6151 conversion and validation functionality.
 
 ## Repository
 https://github.com/stuinfla/Edgar13FConverter2
-
-## Requirements
-- Python 3.9+
-- Required packages (see requirements.txt)
-- Railway account for deployment
 
 ## Installation
 1. Clone the repository:
@@ -50,28 +60,44 @@ https://github.com/stuinfla/Edgar13FConverter2
    cd Edgar13FConverter2
    ```
 
-2. Install dependencies:
+2. Create and activate a virtual environment (recommended):
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Run locally:
+4. Run locally:
    ```bash
-   gunicorn app:app
+   python3 app.py
    ```
-   Access the application at http://localhost:5000
+   The application will typically be accessible at http://localhost:8080 or http://127.0.0.1:8080.
 
 ## Usage
-1. Prepare your Excel file following the required format
-2. Access the web interface at http://localhost:5000
-3. Upload your .xlsx file
-4. Download the generated XML file
+1. Prepare your Excel file following the required format for either 13F or 6151.
+2. Access the web interface (e.g., http://localhost:8080).
+3. Select the desired `Conversion Type` (EDGAR Form 13F or FINRA Rule 6151).
+4. If FINRA Rule 6151 is selected, provide the `Firm Name`, `Reporting Year`, and `Reporting Quarter`.
+5. Upload your .xlsx file.
+6. Click the "Convert to ... XML" button.
+7. The application will display a success message, the names of the original and converted files, and (for 6151) the XML validation status.
+8. Download the generated XML file.
 
 ## Compliance
+
+### EDGAR Form 13F
 The application strictly follows:
 - EDGAR Form 13F XML Technical Specification (v1.0)
-- eis_13FDocument.xsd schema
+- `eis_13FDocument.xsd` schema
 - SEC filing requirements for institutional investment managers
+
+### FINRA Rule 6151 (New in v1.2)
+- FINRA Rule 6151 for Held NMS Stocks and Listed Options Order Routing Public Disclosure.
+- FINRA Order Handling Data Technical Specification (`oh-20191231.xsd` schema).
 
 ## Deployment
 This application uses GitHub-based deployment to Railway. The deployment process is:
@@ -101,16 +127,36 @@ This application uses GitHub-based deployment to Railway. The deployment process
    - Confirm service status is "Running"
 
 ## Testing
-Sample input/output files are provided:
-- Input/Zeno 13F 1Q '24.xlsx
-- Output/Zeno_13F_1Q_24.xml
-- Output/zeno1q2413f.xml
+Sample input and output files are provided to demonstrate functionality and expected formats.
+
+### EDGAR Form 13F Examples:
+- **Primary Example:**
+    - Input:  `Test Input files 13F/zenocapital1q25positions-1.xlsx`
+    - Output: `Test output files 13F/zenocapital1q25positions-1.xml`
+- *Additional 13F examples can be found in the `Input/`, `Test Input files 13F/`, `Output/`, `Sample outputs/`, and `Test output files 13F/` directories.*
+
+### FINRA Rule 6151 Examples:
+- **Primary Example:**
+    - Input:  `Test file Finra 6151/281065_606_NMS_2024_Q2.xlsx`
+    - Output: `Test file Finra 6151/281065_606_NMS_2024_Q2.xml`
+- *Additional 6151 examples (input .xlsx and corresponding .xml output) can be found in the `Test file Finra 6151/` directory.*
 
 ## Documentation
-The complete technical specifications for the application are permanently stored in the Conversion Specs folder:
-- Conversion specs/EDGAR Form 13F XML Technical Specification.pdf
-- Conversion specs/eis_13FDocument.xsd
+Key technical specifications and schemas are stored in the repository:
+
+### EDGAR Form 13F:
+- `Conversion specs/EDGAR Form 13F XML Technical Specification.pdf`
+- `Conversion specs/eis_13FDocument.xsd`
+- `Conversion specs/eis_Common.xsd`
+
+### FINRA Rule 6151:
+- `Finra 6151 requirements/Order_Handling_Data_Technical_Specification_20190331.pdf`
+- `Finra 6151 requirements/oh-20191231.xsd`
+- Other supporting documents in `Finra 6151 requirements/`
 
 Additional documentation:
 - README.md (this file)
-- Sample input/output files in Input/ and Output/ folders
+- Sample input/output files in their respective test directories.
+
+---
+*Copyright 2025 ISO Vision LLC.*
