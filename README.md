@@ -1,4 +1,4 @@
-# EDGAR Form 13F & FINRA Rule 6151 XML Converter - Version 1.2 (Enhanced Functionality)
+# EDGAR Form 13F & FINRA Rule 6151 XML Converter - Version 2.5
 
 ## Project Purpose
 This application was developed to streamline the process of converting Excel-based financial data into SEC-compliant EDGAR XML format for Form 13F filings and FINRA-compliant XML for Rule 6151 (Held Order Routing Reports). The goal is to provide institutional investment managers and broker-dealers with a reliable, automated solution that ensures compliance with regulatory requirements while reducing manual effort and potential errors.
@@ -18,6 +18,15 @@ This application was developed to streamline the process of converting Excel-bas
 - Production-ready codebase.
 - Automatic cleanup of temporary files.
 - Copyright notice added to the user interface.
+
+## Version 2.5 Highlights
+- **UI Enhancements:**
+    - Added tooltips with info icons for key input fields for better user guidance.
+    - Implemented a "Clear Form" button to easily reset all inputs.
+    - Dynamically updating copyright year.
+    - Version number (v2.5) displayed in the UI.
+- **Bug Fixes:**
+    - Corrected duplicated copyright notice.
 
 ## Key Features
 
